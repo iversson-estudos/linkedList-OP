@@ -37,4 +37,55 @@ class LinkedList {
       this.head = newNode;
     }
   }
+  /*RETURNS SIZE OF LIST */
+  size() {
+    let sum = 0;
+    let currentNode = this.head;
+    while (currentNode) {
+      currentNode = currentNode.nextNode;
+      sum++;
+    }
+    return sum;
+  }
+
+  getHead() {
+    return this.head;
+  }
+
+  getTail() {
+    return this.tail;
+  }
+
+  /*GETS NODE BASED ON INDEX*/
+  at(index) {
+    let currentIndex = 0;
+    let currentNode = this.head;
+    while (currentIndex < index) {
+      currentNode = currentNode.nextNode;
+      currentIndex++;
+    }
+    return currentNode;
+  }
+  /*REMOVES LAST NODE OF LIST */
+  pop() {
+    /*IN CASE NO NODES */
+    if (!this.head) {
+      return;
+    }
+    /*IN CADE 1 NODE */
+    if (!this.head.nextNode) {
+      this.head = null;
+      this.tail = null;
+    }
+
+    let currentNode = this.head;
+    /*RUNS THROUGH LIST TO REACH SECOND TO LAST NODE */
+    while (currentNode.nextNode && currentNode.nextNode.nextNode) {
+      currentNode = currentNode.nextNode;
+    }
+    this.tail = currentNode;
+    currentNode.nextNode = null;
+  }
 }
+
+export { LinkedList };
