@@ -72,7 +72,7 @@ class LinkedList {
     if (!this.head) {
       return;
     }
-    /*IN CADE 1 NODE */
+    /*IN CASE 1 NODE */
     if (!this.head.nextNode) {
       this.head = null;
       this.tail = null;
@@ -83,8 +83,96 @@ class LinkedList {
     while (currentNode.nextNode && currentNode.nextNode.nextNode) {
       currentNode = currentNode.nextNode;
     }
+    /*UPDATES NEW TAIL DELETES POINTER TO NEXT NODE */
     this.tail = currentNode;
     currentNode.nextNode = null;
+  }
+
+  /*SEARCHES LIST AND RETURNS TRUE OR FALSE IF VALUE FOUND OR NOT */
+  contains(value) {
+    let currentNode = this.head;
+    while (currentNode) {
+      if (currentNode.value === value) {
+        return true;
+      }
+      currentNode = currentNode.nextNode;
+    }
+    return false;
+  }
+  /*FINDS INDEX OF VALUE OR RETURNS NULL IF NOT FOUND */
+  find(value) {
+    let index = 0;
+    let currentNode = this.head;
+
+    while (currentNode) {
+      if (currentNode.value === value) {
+        return index;
+      }
+      currentNode = currentNode.nextNode;
+      index++;
+    }
+    return null;
+  }
+
+  toString() {
+    let currentNode = this.head;
+    let string = "";
+
+    /*IN CASE ONLY 1 NODE */
+    if (!currentNode.nextNode && currentNode) {
+      string += " ( ";
+      string += currentNode.value;
+      string += " ) ->";
+      return string + " null";
+    }
+
+    while (currentNode.nextNode) {
+      string += " ( ";
+      string += currentNode.value;
+      string += " ) ->";
+      currentNode = currentNode.nextNode;
+    }
+
+    return string + " null";
+  }
+
+  insertAt(value, index) {
+    /*CHECK FOR NULL VALUES */
+    if (
+      value == null ||
+      typeof index !== "number" ||
+      index < 0 ||
+      index > this.size()
+    ) {
+      return;
+    }
+
+    /*IF VALUE IS SET TO INSERT AT HEAD */
+    if (index == 0) {
+      this.prepend(value);
+      return;
+    }
+
+    /*IF VALUE IS SET TO INSERT AT TAIL */
+    if (index == this.size()) {
+      this.append(value);
+      return;
+    }
+
+    let currentNode = this.head;
+    let previousNode = null;
+    let currentIndex = 0;
+
+    /*FINDS NODE WHERE TO INSERT NEW VALUE */
+    while (currentNode.nextNode && currentIndex <= index - 1) {
+      previousNode = currentNode;
+      currentNode = currentNode.nextNode;
+      currentIndex++;
+    }
+
+    /*CREATES NEW NODE WITH POINTER */
+    const newNode = new Node(value, currentNode);
+    previousNode.nextNode = newNode;
   }
 }
 
