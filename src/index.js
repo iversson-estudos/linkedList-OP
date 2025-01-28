@@ -1,13 +1,13 @@
 import "./styles.css";
 import { LinkedList } from "./classes/linkedList";
 
-const newList = new LinkedList();
-newList.append(4);
-newList.append(5);
-console.log(newList.toString());
+const list = new LinkedList();
 
-newList.insertAt(4540, 1);
+list.append("dog");
+list.append("cat");
+list.append("parrot");
+list.append("hamster");
+list.append("snake");
+list.append("turtle");
 
-console.log(newList);
-
-console.log(newList.toString());
+console.log(list.toString());

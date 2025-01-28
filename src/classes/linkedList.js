@@ -126,7 +126,7 @@ class LinkedList {
       return string + " null";
     }
 
-    while (currentNode.nextNode) {
+    while (currentNode) {
       string += " ( ";
       string += currentNode.value;
       string += " ) ->";
